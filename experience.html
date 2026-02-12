@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experience — Rayner Dcunha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 52px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 12px; bottom: 60px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 60%, transparent 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 72px;
+    }
+
+    /* Diamond marker */
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -60px; top: 12px;
+      width: 10px; height: 10px;
+      border: 1px solid var(--accent);
+      background: var(--bg);
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px rgba(0,229,255,0.3);
+    }
+
+    .timeline-head {
+      margin-bottom: 20px;
+    }
+    .timeline-role {
+      font-family: var(--display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      color: var(--text-bright);
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .timeline-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .timeline-company {
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+    }
+    .timeline-sep { color: var(--text-dim); }
+    .timeline-location {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .timeline-date {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .timeline-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 32px;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+      transition: border-color 0.25s;
+    }
+    .timeline-body:hover { border-color: rgba(0,229,255,0.2); }
+
+    .timeline-points {
+      list-style: none;
+      padding: 0;
+    }
+    .timeline-points li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 12px;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+    .timeline-points li:last-child { margin-bottom: 0; }
+    .timeline-points li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .timeline-tag {
+      padding: 3px 10px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,0.18);
+      background: rgba(0,229,255,0.04);
+    }
+
+    /* Education block */
+    .edu-block {
+      margin-top: 80px;
+      padding-top: 64px;
+      border-top: 1px solid var(--border);
+    }
+    .edu-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 36px;
+    }
+    .edu-label::before { content: '// '; color: var(--text-dim); }
+
+    .edu-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 36px;
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
+      transition: border-color 0.25s;
+    }
+    .edu-card:hover { border-color: rgba(0,229,255,0.2); }
+    .edu-school {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+    .edu-degree { color: var(--text); font-size: 13px; margin-bottom: 4px; }
+    .edu-location { color: var(--text-dim); font-size: 12px; }
+    .edu-date {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      white-space: nowrap;
+      align-self: start;
+    }
+    .edu-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    @media (max-width: 700px) {
+      .timeline { padding-left: 28px; }
+      .timeline-item::before { left: -36px; }
+      .timeline-date { margin-left: 0; margin-top: 8px; }
+      .edu-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">RD<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+    <header class="page-header reveal">
+      <div class="page-header-top">
+        <span class="page-num">02</span>
+        <div class="page-line"></div>
+      </div>
+      <h1 class="page-title">Experience</h1>
+      <p class="page-subtitle">Where I've worked and what I've built.</p>
+    </header>
+
+    <div class="timeline">
+
+      <!-- DRA -->
+      <div class="timeline-item reveal">
+        <div class="timeline-head">
+          <div class="timeline-role">Research Assistant</div>
+          <div class="timeline-meta-row">
+            <span class="timeline-company">Dean's Research Awards</span>
+            <span class="timeline-sep">·</span>
+            <span class="timeline-location">University of Alberta, Edmonton AB</span>
+            <span class="timeline-date">Jan 2025 – Apr 2025</span>
+          </div>
+        </div>
+        <div class="timeline-body">
+          <ul class="timeline-points">
+            <li>Built Python tools to automate analysis of 5,000+ nodes in a knowledge graph, improving research efficiency significantly</li>
+            <li>Applied Neo4j and Cypher queries to identify structural patterns in large-scale graph databases</li>
+            <li>Designed mechanisms to analyze entity relationships, improving network community detection accuracy</li>
+            <li>Strengthened problem-solving, data analysis, and adaptability with emerging technologies through hands-on research</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="timeline-tag">Python</span>
+            <span class="timeline-tag">Neo4j</span>
+            <span class="timeline-tag">Cypher</span>
+            <span class="timeline-tag">Graph Databases</span>
+            <span class="timeline-tag">Data Analysis</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marmul -->
+      <div class="timeline-item reveal">
+        <div class="timeline-head">
+          <div class="timeline-role">Accounts Intern</div>
+          <div class="timeline-meta-row">
+            <span class="timeline-company">Marmul Travel and Tours</span>
+            <span class="timeline-sep">·</span>
+            <span class="timeline-location">Muscat, Oman</span>
+            <span class="timeline-date">May 2023 – Aug 2023</span>
+          </div>
+        </div>
+        <div class="timeline-body">
+          <ul class="timeline-points">
+            <li>Reconciled daily bank statements against ledger entries, improving financial record accuracy by 15%</li>
+            <li>Monitored receivables and payables through Ageing Analysis, ensuring timely collections</li>
+            <li>Processed 1,000+ invoices and receipts for individual and corporate clients</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="timeline-tag">MS Excel</span>
+            <span class="timeline-tag">Accounting</span>
+            <span class="timeline-tag">Financial Analysis</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Education -->
+    <div class="edu-block reveal">
+      <div class="edu-label">Education</div>
+      <div class="edu-card">
+        <div>
+          <div class="edu-school">University of Alberta</div>
+          <div class="edu-degree">Bachelor of Science — Computer Engineering (Software Co-Op)</div>
+          <div class="edu-location">Edmonton, AB · Currently 3rd Year, 5th Semester</div>
+          <div class="edu-note">↳ Seeking 4 or 8 month internships from Jan to Aug 2026</div>
+        </div>
+        <div class="edu-date">Sep 2023 – Present</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 64px; display: flex; gap: 14px; flex-wrap: wrap;" class="reveal">
+      <a href="projects.html" class="btn-primary">View Projects →</a>
+      <a href="contact.html" class="btn-secondary">Contact Me</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Designed & built by <span>Rayner Dcunha</span> — raynerdcunha.com</p>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Rayner Dcunha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Bio */
+    .bio p {
+      color: var(--text);
+      margin-bottom: 22px;
+      font-size: 14px;
+      line-height: 1.95;
+    }
+    .bio p strong { color: var(--accent); font-weight: 700; }
+
+    /* Details cards */
+    .details-col { display: flex; flex-direction: column; gap: 20px; }
+
+    .detail-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+      transition: border-color 0.25s;
+    }
+    .detail-card:hover { border-color: rgba(0,229,255,0.25); }
+
+    .detail-card-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .detail-card-label::before { content: '// '; color: var(--text-dim); }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key { color: var(--text-dim); letter-spacing: 1px; }
+    .info-val { color: var(--text-bright); }
+
+    /* Skills */
+    .skills-section { margin-top: 64px; }
+    .skills-section-title {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+    }
+    .skills-section-title::before { content: '// '; color: var(--text-dim); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .skill-group:hover {
+      border-color: rgba(0,229,255,0.2);
+      transform: translateY(-3px);
+    }
+    .skill-group-name {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      font-family: var(--mono);
+      background: rgba(0,229,255,0.02);
+      transition: all 0.2s;
+    }
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,229,255,0.07);
+    }
+
+    /* Certs */
+    .certs-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 48px;
+    }
+    .cert-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-dim);
+      background: var(--surface);
+      transition: all 0.2s;
+    }
+    .cert-badge::before {
+      content: '✓';
+      color: #00ff88;
+      font-size: 11px;
+    }
+    .cert-badge:hover {
+      border-color: rgba(0,255,136,0.3);
+      color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">RD<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+    <header class="page-header reveal">
+      <div class="page-header-top">
+        <span class="page-num">01</span>
+        <div class="page-line"></div>
+      </div>
+      <h1 class="page-title">About Me</h1>
+      <p class="page-subtitle">Engineer. Problem solver. Currently in Edmonton.</p>
+    </header>
+
+    <div class="about-grid">
+      <div class="bio reveal">
+        <p>
+          I'm <strong>Rayner Dcunha</strong>, a Computer Engineering student at the 
+          <strong>University of Alberta</strong> in my third year of a Software Co-Op program. 
+          I build things that sit at the crossroads of software architecture, data engineering, 
+          and embedded systems.
+        </p>
+        <p>
+          My most recent work was a <strong>Dean's Research Awards Research Assistantship</strong>, 
+          where I built Python automation tools to analyze knowledge graphs with 5,000+ nodes — 
+          applying Neo4j and Cypher to surface structural patterns in complex graph databases.
+        </p>
+        <p>
+          I thrive in environments where I can learn fast and ship real things. Whether it's 
+          designing a recursive algorithm, writing Cypher queries against a large graph, or 
+          CAD-ing a physical prototype — I care about the craft at every layer of the stack.
+        </p>
+        <p>
+          Outside of engineering, I speak <strong>English, Hindi, and Konkani</strong>. 
+          I swim, play badminton, and experiment in the kitchen whenever I get the chance.
+        </p>
+        <p>
+          Currently open to <strong>4 or 8-month internships starting January 2026</strong>. 
+          Based in Edmonton, AB. Originally from Muscat, Oman.
+        </p>
+
+        <div style="margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="contact.html" class="btn-primary">Get In Touch</a>
+          <a href="experience.html" class="btn-secondary">View Experience →</a>
+        </div>
+      </div>
+
+      <div class="details-col reveal">
+        <div class="detail-card">
+          <div class="detail-card-label">Details</div>
+          <div class="info-row"><span class="info-key">University</span><span class="info-val">UAlberta</span></div>
+          <div class="info-row"><span class="info-key">Degree</span><span class="info-val">B.Sc. CompEng</span></div>
+          <div class="info-row"><span class="info-key">Year</span><span class="info-val">3rd Year · 5th Sem</span></div>
+          <div class="info-row"><span class="info-key">Location</span><span class="info-val">Edmonton, AB</span></div>
+          <div class="info-row"><span class="info-key">Available</span><span class="info-val" style="color:#00ff88">Jan 2026</span></div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-card-label">Scholarships</div>
+          <div class="info-row"><span class="info-key" style="font-size:11px;">Int'l Admission</span><span class="info-val" style="color:var(--accent2)">2023</span></div>
+          <div class="info-row"><span class="info-key" style="font-size:11px;">Regional Excellence</span><span class="info-val" style="color:var(--accent2)">2023</span></div>
+          <div class="info-row"><span class="info-key" style="font-size:11px;">Iron Standard</span><span class="info-val" style="color:var(--accent2)">2023</span></div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-card-label">Licenses</div>
+          <div class="info-row"><span class="info-key">Driver's</span><span class="info-val">Class 7 GDL</span></div>
+          <div class="info-row"><span class="info-key">Languages</span><span class="info-val">EN · HI · KON</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="skills-section reveal">
+      <div class="skills-section-title">Technical Skills</div>
+      <div class="skills-grid">
+        <div class="skill-group reveal">
+          <div class="skill-group-name">Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">C</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Cypher</span>
+            <span class="skill-tag">ARM ASM</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <div class="skill-group-name">Libraries</div>
+          <div class="skill-tags">
+            <span class="skill-tag">pandas</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">Neo4j</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <div class="skill-group-name">Systems</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Linux/Unix</span>
+            <span class="skill-tag">Windows</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <div class="skill-group-name">Hardware</div>
+          <div class="skill-tags">
+            <span class="skill-tag">3D Printing</span>
+            <span class="skill-tag">CO₂ Laser</span>
+            <span class="skill-tag">Hand Tools</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certs -->
+    <div class="reveal" style="margin-top: 48px;">
+      <div class="skills-section-title">Certifications</div>
+      <div class="certs-row">
+        <div class="cert-badge">Working Safely — UAlberta 2025</div>
+        <div class="cert-badge">Lab & Chemical Safety — UAlberta 2024</div>
+        <div class="cert-badge">WHMIS — UAlberta 2023</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Designed & built by <span>Rayner Dcunha</span> — raynerdcunha.com</p>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>

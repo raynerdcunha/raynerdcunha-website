@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rayner Dcunha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 60px 80px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-inner { max-width: 860px; }
+
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+    .hero-tag::before { content: '// '; color: var(--text-dim); }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(56px, 9vw, 108px);
+      font-weight: 800;
+      line-height: 0.92;
+      color: var(--text-bright);
+      letter-spacing: -4px;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.25s forwards;
+    }
+    h1 .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(0,229,255,0.35);
+    }
+    h1 .accent-char { color: var(--accent); }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text);
+      max-width: 520px;
+      margin-bottom: 52px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+      line-height: 1.85;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.55s forwards;
+    }
+
+    /* Right side nav tiles */
+    .hero-nav {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.8s forwards;
+    }
+    .nav-tile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      background: rgba(13,17,23,0.6);
+      backdrop-filter: blur(6px);
+      transition: all 0.25s ease;
+      width: 180px;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    }
+    .nav-tile:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,229,255,0.05);
+      transform: translateX(-6px);
+      box-shadow: var(--glow);
+    }
+    .nav-tile-num {
+      color: var(--accent);
+      font-size: 10px;
+      opacity: 0.7;
+    }
+
+    /* Bottom bar */
+    .hero-bottom {
+      position: absolute;
+      bottom: 40px;
+      left: 60px;
+      right: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+      z-index: 2;
+    }
+    .status-dot {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1.5px;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      background: #00ff88;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #00ff88;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .scroll-hint {
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    @media (max-width: 900px) {
+      #hero { padding: 120px 24px 100px; }
+      .hero-nav { display: none; }
+      .hero-bottom { left: 24px; right: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">RD<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-inner">
+      <p class="hero-tag">Computer Engineering — University of Alberta</p>
+      <h1>
+        Rayner<br>
+        <span class="outline">Dc<span class="accent-char">u</span>nha</span>
+      </h1>
+      <p class="hero-desc">
+        Building at the intersection of software and hardware.
+        Seeking internships Jan–Aug 2026.
+      </p>
+      <div class="hero-ctas">
+        <a href="contact.html" class="btn-primary">Get In Touch</a>
+        <a href="projects.html" class="btn-secondary">View Projects</a>
+      </div>
+    </div>
+
+    <div class="hero-nav">
+      <a href="about.html" class="nav-tile"><span class="nav-tile-num">01</span> About</a>
+      <a href="experience.html" class="nav-tile"><span class="nav-tile-num">02</span> Experience</a>
+      <a href="projects.html" class="nav-tile"><span class="nav-tile-num">03</span> Projects</a>
+      <a href="contact.html" class="nav-tile"><span class="nav-tile-num">04</span> Contact</a>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="status-dot">
+        <div class="dot"></div>
+        Available for internships — Jan 2026
+      </div>
+      <div class="scroll-hint">Edmonton, AB</div>
+    </div>
+  </section>
+
+  <script src="shared.js"></script>
+</body>
+</html>

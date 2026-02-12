@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Rayner Dcunha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .project-card:hover {
+      border-color: rgba(0,229,255,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5), 0 0 30px rgba(0,229,255,0.1);
+    }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    /* Different accent per card */
+    .card-cyan::before { background: linear-gradient(to right, var(--accent), var(--accent3)); }
+    .card-orange::before { background: linear-gradient(to right, var(--accent2), var(--accent3)); }
+
+    /* Corner cut indicator */
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 28px; height: 28px;
+      background: var(--bg);
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+      border-left: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    .project-icon {
+      width: 52px; height: 52px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      background: rgba(0,229,255,0.03);
+      flex-shrink: 0;
+    }
+    .project-links { display: flex; gap: 14px; align-items: center; }
+    .project-link {
+      color: var(--text-dim);
+      font-size: 11px;
+      text-decoration: none;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .project-link:hover { color: var(--accent); }
+
+    .project-num {
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    .project-name {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-bright);
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      line-height: 1.1;
+    }
+    .project-desc {
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.8;
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .project-highlights {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .project-highlights li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .project-highlights li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-size: 11px;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+    .tech-tag {
+      padding: 3px 10px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,0.18);
+      background: rgba(0,229,255,0.04);
+      font-family: var(--mono);
+    }
+
+    /* More coming card */
+    .card-coming {
+      border-style: dashed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 280px;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+    .card-coming:hover { opacity: 0.8; border-color: var(--accent); transform: none; box-shadow: none; }
+    .card-coming-icon { font-size: 32px; margin-bottom: 16px; color: var(--text-dim); }
+    .card-coming p { font-size: 12px; color: var(--text-dim); letter-spacing: 1px; }
+
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">RD<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+    <header class="page-header reveal">
+      <div class="page-header-top">
+        <span class="page-num">03</span>
+        <div class="page-line"></div>
+      </div>
+      <h1 class="page-title">Projects</h1>
+      <p class="page-subtitle">Things I've designed, built, and shipped.</p>
+    </header>
+
+    <div class="projects-grid">
+
+      <!-- Puppy-Pi -->
+      <div class="project-card card-cyan reveal">
+        <div class="project-top">
+          <div class="project-icon">⚙</div>
+          <div class="project-links">
+            <a href="https://github.com/raynerdcunha" target="_blank" class="project-link">GitHub ↗</a>
+          </div>
+        </div>
+        <div class="project-num">// 01</div>
+        <div class="project-name">Puppy-Pi Backpack</div>
+        <p class="project-desc">
+          Functional cargo backpack designed for the Puppy-Pi robot — engineered to transport 
+          goods and tested in live competition.
+        </p>
+        <ul class="project-highlights">
+          <li>Collaborated in a 5-person team through full engineering design process</li>
+          <li>Produced CAD models and coordinated 3D printing + CO₂ laser cutting</li>
+          <li>Delivered technical presentation and report to competition judges</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tech-tag">CAD</span>
+          <span class="tech-tag">3D Printing</span>
+          <span class="tech-tag">Laser Cutting</span>
+          <span class="tech-tag">ENGG 160</span>
+          <span class="tech-tag">Team Design</span>
+        </div>
+      </div>
+
+      <!-- Sudoku -->
+      <div class="project-card card-orange reveal">
+        <div class="project-top">
+          <div class="project-icon">#</div>
+          <div class="project-links">
+            <a href="https://github.com/raynerdcunha" target="_blank" class="project-link">GitHub ↗</a>
+          </div>
+        </div>
+        <div class="project-num">// 02</div>
+        <div class="project-name">Sudoku Solver</div>
+        <p class="project-desc">
+          Command-line Sudoku solver implementing recursive backtracking with optimized 
+          runtime and clean, modular architecture.
+        </p>
+        <ul class="project-highlights">
+          <li>Implemented recursive backtracking algorithm with constraint pruning</li>
+          <li>Designed modular functions for readability and future scalability</li>
+          <li>Published on GitHub with clean documentation as a portfolio piece</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tech-tag">Python 3</span>
+          <span class="tech-tag">Algorithms</span>
+          <span class="tech-tag">Recursion</span>
+          <span class="tech-tag">GitHub</span>
+        </div>
+      </div>
+
+      <!-- Placeholder -->
+      <div class="project-card card-coming reveal">
+        <div class="card-coming-icon">+</div>
+        <p>More projects coming soon</p>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 72px; display: flex; gap: 14px; flex-wrap: wrap;" class="reveal">
+      <a href="https://github.com/raynerdcunha" target="_blank" class="btn-primary">View GitHub ↗</a>
+      <a href="contact.html" class="btn-secondary">Work Together</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Designed & built by <span>Rayner Dcunha</span> — raynerdcunha.com</p>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>
